@@ -11,7 +11,7 @@ load_dotenv(dotenv_path='.env')
 DB_CONFIG = {
     'user':os.getenv("DB_USER"), 
     'password':os.getenv("DB_PASSWORD"), 
-    'host':os.getenv("DB_HOST"), 
+    'host':os.getenv("DB_HOST", "localhost"), 
     'port':int(os.getenv("DB_PORT", 3306)), 
     'database':os.getenv("DB_NAME", "")
     }

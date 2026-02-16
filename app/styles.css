@@ -1,0 +1,22 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+.main-title {
+    font-family: 'Inter', sans-serif;
+    color: #2E7D32;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    padding: 1.5rem 0rem;
+    background-color: rgba(141, 205, 225, 0.2);
+    /*background: linear-gradient(90deg, #e8f5e9, #ffffff);*/
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+/* Estilizando o subtítulo */
+.sub-text {
+    text-align: center;
+    color: #555;
+    font-style: italic;
+}
