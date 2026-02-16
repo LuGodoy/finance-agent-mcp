@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finance-agent-mcp"
+version = "0.1.0"
+dependencies = [
+    "streamlit>=1.30",
+    "mcp>=1.0",
+    "fastmcp>=2.14.4",
+    "google-genai>=0.1.0",
+    "mysql-connector-python>=8.3",
+    "python-dotenv>=1.0",
+    "dateparser>=1.2",
+    "pathlib"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*", "database*", "llm*", "mcp_server*", "shared*"]
