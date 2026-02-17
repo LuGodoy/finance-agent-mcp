@@ -32,7 +32,7 @@ setup:
 	@mkdir -p llm
 	@mkdir -p mcp_server/tools
 	@mkdir -p shared
-	@mkdir -p tests
+	@mkdir -p tests/test_gemini_client.py
 	@mkdir -p docs/screenshots
 
 	@touch app/__init__.py app/main.py app/styles.css

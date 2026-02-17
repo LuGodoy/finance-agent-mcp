@@ -19,3 +19,23 @@ dependencies = [
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["app*", "database*", "llm*", "mcp_server*", "shared*"]
+
+# --- SEÇÃO DO RUFF ---
+
+[tool.ruff]
+# Versão do Python alvo
+target-version = "py311"
+# Tamanho máximo da linha
+line-length = 100
+
+[tool.ruff.lint]
+# Regras que o Ruff vai aplicar:
+# E (Error), F (Pyflakes), W (Warning), I (Isort - organiza imports)
+select = ["E", "F", "W", "I"]
+# Regras que você quer ignorar (ex: erro de linha muito longa E501)
+ignore = ["E501"]
+
+[tool.ruff.format]
+# Configurações para o formatador automático do Ruff
+quote-style = "double"
+indent-style = "space"

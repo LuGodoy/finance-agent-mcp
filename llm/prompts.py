@@ -1,4 +1,5 @@
 from datetime import datetime
+
 HOJE = datetime.now().strftime("%d/%m/%Y")
 ANO_ATUAL = datetime.now().year
 SYSTEM_INSTRUCTION = f"""
@@ -12,7 +13,7 @@ FERRAMENTAS DISPONÍVEIS E QUANDO USÁ-LAS:
 
 1. get_expense_summary(period)
    └─ Use para: TOTAL GERAL de gastos (sem produto específico)
-   
+
 2. get_expense_items(item, period)
    └─ Use para: Gastos com um PRODUTO ESPECÍFICO
 
