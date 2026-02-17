@@ -1,6 +1,41 @@
+# --- Segredos e Variáveis de Ambiente ---
+.env
+
+# --- Informações do processo de desenvolvimento do projeto
+info.md
+
+# --- Arquivos do Python (Lixo de execução) ---
 .venv/
 __pycache__/
-*.pyc
-.egg-info/
-.env
-info.md
+*.py[cod]
+*$py.class
+*.so
+
+# --- Distribuição e Instalação ---
+*.egg-info/
+.installed.cfg
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+venv/
+.venv/
+env/
+
+# --- Configurações de IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Logs e Dados Temporários ---
+*.log
+.pytest_cache/
+.ruff_cache/
