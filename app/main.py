@@ -13,9 +13,9 @@ logger = logging.getLogger(__name__)
 
 load_dotenv()
 
-st.set_page_config(page_title="Gestor de Gastos", page_icon="💰")
+st.set_page_config(page_title="Gestor de Gastos", page_icon="💰", layout="centered")
 
-MAX_HISTORY = 3  # número máximo de mensagens no chat
+MAX_HISTORY = 6  # número máximo de mensagens no chat
 
 # ------------------ Cache do Agente ------------------
 

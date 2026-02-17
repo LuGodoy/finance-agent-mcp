@@ -3,9 +3,10 @@
 
 .main-title {
     font-family: 'Inter', sans-serif;
-    color: #2E7D32;
+    color: #1B5E20;
+    /*#2E7D32;*/
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.2–2.5rem;
     font-weight: 700;
     padding: 1.5rem 0rem;
     background-color: rgba(141, 205, 225, 0.2);
@@ -17,6 +18,12 @@
 /* Estilizando o subtítulo */
 .sub-text {
     text-align: center;
-    color: #555;
+    color: #2a2929;
     font-style: italic;
+}
+
+/* Deixa os cards do Streamlit mais arredondados */
+.stChatMessage {
+    border-radius: 15px;
+    margin-bottom: 10px;
 }

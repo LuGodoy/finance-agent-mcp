@@ -154,10 +154,12 @@ class FinanceAgent:
 
 """# Exemplo de uso:
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
     raise ValueError("A chave da API do Gemini não está definida.")
 test = FinanceAgent(api_key)
+print(test)
 resposta = test.ask_question("Quanto gastei com cerveja em novembro 2025?")"""
