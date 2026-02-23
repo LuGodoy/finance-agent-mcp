@@ -149,22 +149,11 @@ class FinanceAgent:
         except Exception as e:
             logger.error(f"Erro no FinanceAgent: {e}")
             raise e"""
-    def ask_question(self, prompt: str) -> str:
-        try:
-            try:
-                loop = asyncio.get_running_loop()
-            except RuntimeError:
-                loop = None
 
-            if loop and loop.is_running():
-                # Se já existir um loop (caso do erro no GitHub CI), usamos ele
-                # Nota: Talvez precise instalar: pip install nest-asyncio
-                import nest_asyncio
-                nest_asyncio.apply()
-                return loop.run_until_complete(self._process_mcp_cycle(prompt))
-            else:
-                # Se não houver loop nenhum, o asyncio.run funciona
-                return asyncio.run(self._process_mcp_cycle(prompt))
+    async def ask_question(self, prompt: str) -> str: # DEVE SER ASYNC
+        try:
+            # DEVE TER AWAIT
+            return await self._process_mcp_cycle(prompt) 
         except Exception as e:
             logger.error(f"Erro no FinanceAgent: {e}")
             raise e
