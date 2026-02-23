@@ -141,11 +141,30 @@ class FinanceAgent:
                 # O atributo .text do SDK 2.0 já lida com o None internamente
                 return response.text or "Não consegui gerar uma resposta."
 
-    def ask_question(self, prompt: str) -> str:
+    """def ask_question(self, prompt: str) -> str:
         try:
             # No Streamlit, pode haver um loop rodando.
             # Esta é a forma mais segura de rodar o async
             return asyncio.run(self._process_mcp_cycle(prompt))
+        except Exception as e:
+            logger.error(f"Erro no FinanceAgent: {e}")
+            raise e"""
+    def ask_question(self, prompt: str) -> str:
+        try:
+            try:
+                loop = asyncio.get_running_loop()
+            except RuntimeError:
+                loop = None
+
+            if loop and loop.is_running():
+                # Se já existir um loop (caso do erro no GitHub CI), usamos ele
+                # Nota: Talvez precise instalar: pip install nest-asyncio
+                import nest_asyncio
+                nest_asyncio.apply()
+                return loop.run_until_complete(self._process_mcp_cycle(prompt))
+            else:
+                # Se não houver loop nenhum, o asyncio.run funciona
+                return asyncio.run(self._process_mcp_cycle(prompt))
         except Exception as e:
             logger.error(f"Erro no FinanceAgent: {e}")
             raise e
