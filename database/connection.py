@@ -25,8 +25,11 @@ def validate_env():
     if missing:
         raise EnvironmentError(f"Erro: Variáveis de ambiente ausentes no .env: {', '.join(missing)}")
 
-# Chamamos a validação assim que o módulo é importado
-validate_env()
+# --- AJUSTE PARA O GITHUB ACTIONS ---
+# Só validamos se NÃO estivermos no ambiente do GitHub Actions
+if not os.getenv("GITHUB_ACTIONS"):
+    validate_env()
+# ------------------------------------
 
 DB_CONFIG = {
     "user": os.getenv("DB_USER"),
