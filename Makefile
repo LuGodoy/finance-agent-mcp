@@ -12,13 +12,15 @@ PY=$(VENV)/bin/python
 .PHONY: help
 help:
 	@echo "📦 Comandos disponíveis:"
-	@echo " make setup     -> cria estrutura do projeto"
-	@echo " make install   -> cria venv e instala dependências"
-	@echo " make env       -> cria arquivos .env"
-	@echo " make run       -> roda app Streamlit"
-	@echo " make mcp       -> roda MCP Server"
-	@echo " make test      -> roda testes"
-	@echo " make clean     -> limpa caches"
+	@echo " make setup       -> cria estrutura do projeto"
+	@echo " make install     -> cria venv e instala dependências"
+	@echo " make env         -> cria arquivos .env"
+	@echo " make run         -> roda app Streamlit"
+	@echo " make mcp         -> roda MCP Server"
+	@echo " make list-models -> lista modelos disponíveis no Gemini"
+	@echo " make test        -> roda testes"
+	@echo " make lint        -> executa linter e formatador (Ruff)"
+	@echo " make clean       -> limpa caches e logs"
 
 # ==============================
 # PROJECT STRUCTURE
@@ -32,8 +34,12 @@ setup:
 	@mkdir -p llm
 	@mkdir -p mcp_server/tools
 	@mkdir -p shared
-	@mkdir -p tests/test_gemini_client.py
+	@mkdir -p assets
+	@mkdir -p tests
 	@mkdir -p docs/screenshots
+	@mkdir -p docs/diagrams
+	@mkdir -p docs/gifs
+	@mkdir -p utils
 
 	@touch app/__init__.py app/main.py app/styles.css
 	@touch database/__init__.py database/connection.py
@@ -50,8 +56,12 @@ setup:
 	@touch shared/date_config.py
 
 	@touch tests/__init__.py
+	@touch tests/test_gemini_client.py tests/test_infra.py 
+	@touch utils/__init__.py utils/list_models.py
 
-	@touch README.md requirements.txt pyproject.toml
+	@touch assets/bot.png assets/user.png
+
+	@touch README.md requirements.txt pyproject.toml LICENSE
 
 	@echo "✅ Estrutura criada!"
 
@@ -65,7 +75,8 @@ install:
 
 	@echo "📦 Instalando dependências..."
 	$(PIP) install --upgrade pip
-	$(PIP) install -r requirements.txt
+	# $(PIP) install -r requirements.txt
+	$(PIP) install -e ".[dev]"
 
 	@echo "✅ Ambiente pronto!"
 
@@ -120,7 +131,27 @@ test:
 # ==============================
 .PHONY: clean
 clean:
-	@echo "🧹 Limpando caches..."
+	@echo "🧹Limpando caches e arquivos temporários..."
 	find . -type d -name "__pycache__" -exec rm -r {} +
 	find . -type f -name "*.pyc" -delete
+	rm -rf *.egg-info
+	rm -f *.log
 	@echo "✅ Limpeza concluída!"
+
+# ==============================
+# Models list
+# ==============================
+.PHONY: list-models
+list-models:
+	@echo "🔍 Listando modelos Gemini..."
+	$(PY) utils/list_models.py
+
+# ==============================
+# LINT & FORMAT
+# ==============================
+.PHONY: lint
+lint:
+	@echo "🔍 Rodando Ruff (Lint)..."
+	$(PY) -m ruff check .
+	@echo "🎨 Rodando Ruff (Format)..."
+	$(PY) -m ruff format .

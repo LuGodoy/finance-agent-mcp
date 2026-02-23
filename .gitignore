@@ -7,9 +7,14 @@ info.md
 # --- Arquivos do Python (Lixo de execução) ---
 .venv/
 __pycache__/
+*,pyc
 *.py[cod]
 *$py.class
 *.so
+
+# --- Arquivos de Sistema (macOS / Windows) ---
+.DS_Store
+Thumbs.db
 
 # --- Distribuição e Instalação ---
 *.egg-info/
@@ -26,7 +31,6 @@ sdist/
 var/
 wheels/
 venv/
-.venv/
 env/
 
 # --- Configurações de IDE ---

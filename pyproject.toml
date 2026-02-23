@@ -12,19 +12,28 @@ dependencies = [
     "google-genai>=0.1.0",
     "mysql-connector-python>=8.3",
     "python-dotenv>=1.0",
-    "dateparser>=1.2",
-    "pathlib"
+    "dateparser>=1.2"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.4.0"
 ]
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["app*", "database*", "llm*", "mcp_server*", "shared*"]
+exclude = ["tests*", "docs*"]
+
+[tool.pytest.ini_options]
+filterwarnings = [ "ignore::RuntimeWarning"]
 
 # --- SEÇÃO DO RUFF ---
 
 [tool.ruff]
 # Versão do Python alvo
-target-version = "py311"
+target-version = "py313"
 # Tamanho máximo da linha
 line-length = 100
 

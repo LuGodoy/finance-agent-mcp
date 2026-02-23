@@ -13,7 +13,10 @@ logger = logging.getLogger(__name__)
 class FinanceAgent:
     def __init__(self, api_key: str):
         self.api_key = api_key
-        self.server_params = StdioServerParameters(command="python3", args=["mcp_server/server.py"])
+        self.server_params = StdioServerParameters(
+            command="python",
+            args=["mcp_server/server.py"]
+            )
 
     async def _process_mcp_cycle(self, prompt: str):
         async with stdio_client(self.server_params) as (read, write):
@@ -57,14 +60,10 @@ class FinanceAgent:
                 # simplesmente remova a variável e coloque o valor direto no config:
 
                 client = genai.Client(api_key=self.api_key)
-                model_id = "gemini-3-flash-preview"  # "gemini-2.0-flash" #"gemini-flash-latest" #"gemini-1.5-flash" #"gemini-2.5-flash" #"gemini-1.5-flash" #"gemini-2.0-flash"
+                model_id = "models/gemini-2.5-flash" #"gemini-3-flash-preview"  #"gemini-1.5-flash"  #"gemini-3-flash-preview"  # "gemini-2.0-flash" #"gemini-flash-latest" #"gemini-1.5-flash" #"gemini-2.5-flash" #"gemini-1.5-flash" #"gemini-2.0-flash"
 
-                # _________ para ver qual modelo esta usando
                 logger.info(f"Solicitando modelo: {model_id}")
-                # Esta linha abaixo tenta extrair o modelo real que respondeu, se a resposta chegar
-                # print(f"Modelo real na chamada: {model_id}")
-                # ___________
-
+         
                 from llm.prompts import SYSTEM_INSTRUCTION
 
                 # Ao passar [gemini_tool] diretamente aqui, o Python faz o casting automático correto
@@ -152,8 +151,8 @@ class FinanceAgent:
             raise e
 
 
-"""# Exemplo de uso:
-from dotenv import load_dotenv
+# Exemplo de uso:
+"""from dotenv import load_dotenv
 import os
 
 load_dotenv()
@@ -163,3 +162,35 @@ if not api_key:
 test = FinanceAgent(api_key)
 print(test)
 resposta = test.ask_question("Quanto gastei com cerveja em novembro 2025?")"""
+""
+# No final do arquivo llm/client_gemini.py
+"""
+if __name__ == "__main__":
+    import asyncio
+    from dotenv import load_dotenv
+    import os
+    import logging
+
+    # Configura o log para ver o que o MCP está fazendo no terminal
+    logging.basicConfig(level=logging.INFO)
+
+    load_dotenv()
+    api_key = os.getenv("GEMINI_API_KEY")
+
+    if not api_key:
+        print("❌ ERRO: GEMINI_API_KEY não encontrada no .env")
+    else:
+        agent = FinanceAgent(api_key)
+        
+        print("\n🤖 Iniciando consulta ao Agente Financeiro...")
+        try:
+            # Pergunta que força o uso de ferramentas (Tools)
+            pergunta = "Quanto gastei com cerveja em novembro 2025?"
+            resposta = agent.ask_question(pergunta)
+            
+            print("-" * 30)
+            print(f"RESPOSTA FINAL: {resposta}")
+            print("-" * 30)
+            
+        except Exception as e:
+            print(f"\n💥 OCORREU UM ERRO DURANTE O TESTE: {e}")"""

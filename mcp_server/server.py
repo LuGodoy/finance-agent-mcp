@@ -1,5 +1,3 @@
-import os
-import sys
 
 from fastmcp import FastMCP
 
@@ -7,7 +5,7 @@ from mcp_server.tools.expense_items import expense_items
 from mcp_server.tools.expense_summary import expense_summary
 
 # Adiciona o caminho para encontrar mcp_server
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+#sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Cria o Servidor MCP
 mcp = FastMCP("gerenciador de Gastos")
@@ -56,27 +54,3 @@ async def get_expense_items(item: str, period: str) -> str:
 
 if __name__ == "__main__":
     mcp.run()
-"""if __name__ == "__main__":
-    import sys
-    import os
-    import logging
-
-    # Força o diretório atual no PATH para evitar erros de importação
-    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-    # Configura logs para aparecerem no terminal mesmo em modo STDIO
-    logging.basicConfig(level=logging.DEBUG, stream=sys.stderr)
-    logger = logging.getLogger(__name__)
-
-    try:
-        logger.info("Iniciando execução do FastMCP...")
-        mcp.run()
-    except Exception as e:
-        logger.error(f"FALHA CRÍTICA NO SERVIDOR: {e}", exc_info=True)
-        sys.exit(1)"""
-"""
-if __name__ == "__main__":
-    # Importante: para funcionar com o seu script cliente,
-    # o FastMCP PRECISA rodar no modo 'stdio'.
-    mcp.run(transport="stdio")
-"""

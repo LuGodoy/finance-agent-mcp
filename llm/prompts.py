@@ -43,7 +43,7 @@ REGRAS DE FORMATAÇÃO:
 """
 
 FEW_SHOT_EXAMPLES = f"""
-Usuário: "Quanto gastei na semana passada?"
+Usuário: "Quanto gastamos na semana passada?"
 Ação: get_expense_summary(period="semana passada")
 
 Usuário: "Gastos de 15 de janeiro até 20 de janeiro"
@@ -55,7 +55,7 @@ Ação: get_expense_summary(period="ontem")
 Usuário: "Resumo de março"
 Ação: get_expense_summary(period="março")
 
-Usuário: "Quanto gastei com cerveja em dezembro de 2025?"
+Usuário: "Quanto gastamos com cerveja em dezembro de 2025?"
 Ação: get_expense_items(item="cerveja", period="dezembro de 2025")
 
 Usuário: "Gastos com leite em janeiro 2024"
