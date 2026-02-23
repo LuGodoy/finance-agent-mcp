@@ -1,12 +1,12 @@
 # ____________VERSÃO ___________________
 import logging
 import os
-import traceback 
+import traceback
 
 import streamlit as st
 from dotenv import load_dotenv
 
-from llm.client_gemini import  FinanceAgent
+from llm.client_gemini import FinanceAgent
 
 # ------------------ Configuração básica ------------------
 
@@ -77,7 +77,7 @@ if prompt := st.chat_input("Qual a dúvida sobre seus gastos?"):
         st.markdown(prompt)
 
     # Assistente "🤖"
-    with st.chat_message("assistant", avatar=AI_AVATAR): 
+    with st.chat_message("assistant", avatar=AI_AVATAR):
         with st.spinner("Consultando inteligência financeira..."):
             try:
                 response_text = agent.ask_question(prompt)
@@ -88,7 +88,7 @@ if prompt := st.chat_input("Qual a dúvida sobre seus gastos?"):
                 # 🔥 Limita histórico
                 st.session_state.messages = st.session_state.messages[-MAX_HISTORY:]
 
-            
+
 
             except Exception as e:
                 # 1. Log detalhado para o desenvolvedor (no terminal)
@@ -103,7 +103,7 @@ if prompt := st.chat_input("Qual a dúvida sobre seus gastos?"):
 
                 elif "503" in error_msg or "UNAVAILABLE" in error_msg:
                     st.warning("☁️ **Serviço instável:** O servidor da IA está sobrecarregado. Tente de novo agora.")
-                
+
                 elif "AUTHENTICATION" in error_msg or "API_KEY" in error_msg:
                     st.error("🔑 **Erro de Chave:** Problema na autenticação com a API. Verifique as credenciais.")
 

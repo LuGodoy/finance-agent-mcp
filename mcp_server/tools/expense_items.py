@@ -1,11 +1,11 @@
-import os
 import json
-from dotenv import load_dotenv 
 from typing import Any, Dict, cast
+
+from dotenv import load_dotenv
 from mcp import types
-from database.connection import DB_CONFIG, create_connection
+
+from database.connection import DB_CONFIG, TABLE_NAME, create_connection
 from shared.date_config import PeriodHandler
-from database.connection import create_connection, DB_NAME, TABLE_NAME
 
 load_dotenv(dotenv_path=".env")
 
@@ -103,7 +103,7 @@ async def expense_items(argument: Dict):
         return [types.TextContent(type="text", text=f"Erro ao acessar o banco: {str(e)}")]
 
     finally:
-        if cursor:  
+        if cursor:
             cursor.close()
         if conn and conn.is_connected():
             conn.close()

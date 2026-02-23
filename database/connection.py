@@ -4,6 +4,7 @@ import mysql.connector
 from dotenv import load_dotenv
 from mysql.connector import Error
 
+
 # logger = logging.getLogger(__name__)
 def sanitize_identifier(name: str) -> str:
     if not name:
@@ -20,7 +21,7 @@ def validate_env():
     """Verifica se todas as variáveis obrigatórias estão presentes."""
     required_vars = ["DB_USER", "DB_PASSWORD", "DB_HOST", "DB_NAME", "TABLE_NAME"]
     missing = [var for var in required_vars if not os.getenv(var)]
-    
+
     if missing:
         raise EnvironmentError(f"Erro: Variáveis de ambiente ausentes no .env: {', '.join(missing)}")
 

@@ -63,7 +63,7 @@ class FinanceAgent:
                 model_id = "models/gemini-2.5-flash" #"gemini-3-flash-preview"  #"gemini-1.5-flash"  #"gemini-3-flash-preview"  # "gemini-2.0-flash" #"gemini-flash-latest" #"gemini-1.5-flash" #"gemini-2.5-flash" #"gemini-1.5-flash" #"gemini-2.0-flash"
 
                 logger.info(f"Solicitando modelo: {model_id}")
-         
+
                 from llm.prompts import SYSTEM_INSTRUCTION
 
                 # Ao passar [gemini_tool] diretamente aqui, o Python faz o casting automático correto
@@ -149,48 +149,3 @@ class FinanceAgent:
         except Exception as e:
             logger.error(f"Erro no FinanceAgent: {e}")
             raise e
-
-
-# Exemplo de uso:
-"""from dotenv import load_dotenv
-import os
-
-load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
-if not api_key:
-    raise ValueError("A chave da API do Gemini não está definida.")
-test = FinanceAgent(api_key)
-print(test)
-resposta = test.ask_question("Quanto gastei com cerveja em novembro 2025?")"""
-""
-# No final do arquivo llm/client_gemini.py
-"""
-if __name__ == "__main__":
-    import asyncio
-    from dotenv import load_dotenv
-    import os
-    import logging
-
-    # Configura o log para ver o que o MCP está fazendo no terminal
-    logging.basicConfig(level=logging.INFO)
-
-    load_dotenv()
-    api_key = os.getenv("GEMINI_API_KEY")
-
-    if not api_key:
-        print("❌ ERRO: GEMINI_API_KEY não encontrada no .env")
-    else:
-        agent = FinanceAgent(api_key)
-        
-        print("\n🤖 Iniciando consulta ao Agente Financeiro...")
-        try:
-            # Pergunta que força o uso de ferramentas (Tools)
-            pergunta = "Quanto gastei com cerveja em novembro 2025?"
-            resposta = agent.ask_question(pergunta)
-            
-            print("-" * 30)
-            print(f"RESPOSTA FINAL: {resposta}")
-            print("-" * 30)
-            
-        except Exception as e:
-            print(f"\n💥 OCORREU UM ERRO DURANTE O TESTE: {e}")"""

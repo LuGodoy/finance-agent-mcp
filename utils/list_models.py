@@ -1,6 +1,7 @@
 import os
-from google import genai
+
 from dotenv import load_dotenv
+from google import genai
 
 # 1. Carrega as variáveis do arquivo .env
 load_dotenv()
@@ -15,6 +16,6 @@ for model in client.models.list():
     # Usamos "or []" para garantir que, se for None, vire uma lista vazia
     # E verificamos se supported_actions existe antes de iterar
     actions = model.supported_actions or []
-    
+
     if 'generateContent' in actions:
         print(f"ID: {model.name}")

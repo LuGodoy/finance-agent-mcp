@@ -1,6 +1,7 @@
 import os
-import pytest
+
 from database.connection import create_connection
+
 
 def test_env_variables_exist():
     """Valida se o .env foi carregado e as chaves essenciais existem"""
@@ -20,11 +21,11 @@ def test_table_exists():
     conn = create_connection()
     cursor = conn.cursor()
     table_name = os.getenv("TABLE_NAME")
-    
+
     cursor.execute(f"SHOW TABLES LIKE '{table_name}'")
     result = cursor.fetchone()
-    
+
     cursor.close()
     conn.close()
-    
+
     assert result is not None, f"A tabela '{table_name}' não foi encontrada no banco de dados"

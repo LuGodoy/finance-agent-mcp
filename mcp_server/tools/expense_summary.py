@@ -1,11 +1,11 @@
-import os
 import json
-from dotenv import load_dotenv 
 from typing import Any, Dict, cast
+
+from dotenv import load_dotenv
 from mcp import types
-from database.connection import create_connection
+
+from database.connection import DB_NAME, TABLE_NAME, create_connection
 from shared.date_config import PeriodHandler
-from database.connection import create_connection, DB_NAME, TABLE_NAME
 
 load_dotenv()
 
@@ -14,7 +14,7 @@ async def expense_summary(argument: Dict):
     args = argument or {}
 
     period_raw = args.get("period", "")
-    
+
     if isinstance(period_raw, str) and period_raw.strip().startswith("{"):
         try:
             temp_dict = json.loads(period_raw)
@@ -25,7 +25,7 @@ async def expense_summary(argument: Dict):
         period_str = period_raw
 
     period = PeriodHandler.parse_periodo(period_str)
-    
+
     if not period:
         return [types.TextContent(type="text", text=f"Erro: Período '{period_str}' inválido.")]
 
