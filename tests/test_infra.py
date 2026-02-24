@@ -12,14 +12,15 @@ class TestInfra(unittest.TestCase):
         if IN_GITHUB_ACTIONS:
             self.skipTest("Pulando teste de .env no GitHub Actions")
         
-        assert os.getenv("DB_HOST") is not None
-        assert os.getenv("DB_NAME") is not None
+        self.assertIsNotNone(os.getenv("DB_HOST"))
+        self.assertIsNotNone(os.getenv("DB_NAME"))
 
     @unittest.skipIf(IN_GITHUB_ACTIONS, "Não há banco de dados no GitHub Actions")
     def test_database_connection(self):
         """Tenta estabelecer conexão real com o banco"""
         conn = create_connection()
         self.assertIsNotNone(conn, "Falha crítica: Não foi possível conectar ao MySQL")
+        
         if conn:
             self.assertTrue(conn.is_connected())
             conn.close()
@@ -28,6 +29,10 @@ class TestInfra(unittest.TestCase):
     def test_table_exists(self):
         """Verifica se a tabela configurada realmente existe no banco"""
         conn = create_connection()
+
+        if conn is None:
+            self.fail("Conexão não criada")
+
         cursor = conn.cursor()
         table_name = os.getenv("TABLE_NAME")
 
@@ -37,3 +42,4 @@ class TestInfra(unittest.TestCase):
         cursor.close()
         conn.close()
         self.assertIsNotNone(result)
+        

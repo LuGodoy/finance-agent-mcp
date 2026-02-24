@@ -1,4 +1,3 @@
-import asyncio
 import logging
 
 from google import genai
@@ -153,7 +152,7 @@ class FinanceAgent:
     async def ask_question(self, prompt: str) -> str: # DEVE SER ASYNC
         try:
             # DEVE TER AWAIT
-            return await self._process_mcp_cycle(prompt) 
+            return await self._process_mcp_cycle(prompt)
         except Exception as e:
             logger.error(f"Erro no FinanceAgent: {e}")
             raise e
