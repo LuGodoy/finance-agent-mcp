@@ -155,8 +155,8 @@ O servidor MCP expõe ferramentas específicas que permitem ao LLM interagir com
 
 ### 1️⃣ Clonar o repositório
 ```bash
-git clone https://github.com/SEU-USUARIO/personal-finance-ai-agent-mcp.git
-cd personal-finance-ai-agent-mcp
+https://github.com/SEU_USUARIO/finance-agent-mcp.git
+cd finance-agent-mcp
 ```
 
 ### 2️⃣ Criar ambiente virtual e instalar dependências
