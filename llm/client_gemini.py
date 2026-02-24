@@ -1,3 +1,4 @@
+import sys
 import logging
 
 from google import genai
@@ -12,7 +13,7 @@ logger = logging.getLogger(__name__)
 class FinanceAgent:
     def __init__(self, api_key: str):
         self.api_key = api_key
-        self.server_params = StdioServerParameters(command="python", args=["mcp_server/server.py"])
+        self.server_params = StdioServerParameters(command=sys.executable, args=["mcp_server/server.py"])
 
     async def _process_mcp_cycle(self, prompt: str):
         async with stdio_client(self.server_params) as (read, write):
