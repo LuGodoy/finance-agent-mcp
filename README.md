@@ -5,7 +5,8 @@
 ![LLM](https://img.shields.io/badge/LLM-Gemini-orange)
 ![Architecture](https://img.shields.io/badge/Architecture-MCP-green)
 ![Status](https://img.shields.io/badge/Status-Active-success)
-[![CI Status](https://github.com/LuGodoy/finance-agent-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/LuGodoy/finance-agent-mcp/actions/workflows/ci.yml)
+
+[![Finance Agent MCP - CI](https://github.com/LuGodoy/finance-agent-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/LuGodoy/finance-agent-mcp/actions/workflows/ci.yml)
 
 Assistente inteligente de finanças para grupos utilizando **IA generativa**, arquitetura **MCP (Model Context Protocol)**, integração com **Gemini LLM**, banco de dados **MySQL** e interface conversacional construída com **Streamlit**.
 
@@ -179,6 +180,7 @@ DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=sua_senha
 DB_NAME=personal_finance
+TABLE_NAME=
 ```
 
 ### 4️⃣ Executar a aplicação
