@@ -1,11 +1,10 @@
-
 from fastmcp import FastMCP
 
 from mcp_server.tools.expense_items import expense_items
 from mcp_server.tools.expense_summary import expense_summary
 
 # Adiciona o caminho para encontrar mcp_server
-#sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Cria o Servidor MCP
 mcp = FastMCP("gerenciador de Gastos")

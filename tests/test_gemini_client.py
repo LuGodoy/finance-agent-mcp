@@ -3,9 +3,9 @@ from unittest.mock import patch
 
 
 class TestFinanceAgent(unittest.TestCase):
-
     def _make_agent(self):
         from llm.client_gemini import FinanceAgent
+
         return FinanceAgent(api_key="fake-api-key")
 
     @patch("llm.client_gemini.asyncio.run")

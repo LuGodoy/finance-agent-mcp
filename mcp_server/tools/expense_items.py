@@ -9,6 +9,7 @@ from shared.date_config import PeriodHandler
 
 load_dotenv(dotenv_path=".env")
 
+
 async def expense_items(argument: Dict):
     """
     Lógica interna para buscar gastos de itens específicos no banco de dados.

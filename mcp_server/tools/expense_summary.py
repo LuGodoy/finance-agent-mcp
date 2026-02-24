@@ -9,6 +9,7 @@ from shared.date_config import PeriodHandler
 
 load_dotenv()
 
+
 async def expense_summary(argument: Dict):
     """Lógica interna para buscar resumo de gastos no banco de dados."""
     args = argument or {}

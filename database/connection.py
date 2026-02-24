@@ -11,6 +11,7 @@ def sanitize_identifier(name: str) -> str:
         return ""
     return name.replace("`", "")
 
+
 load_dotenv(dotenv_path=".env")
 
 # 2. Variáveis limpas exportadas para todo o projeto
@@ -24,7 +25,10 @@ def validate_env():
     missing = [var for var in required_vars if not os.getenv(var)]
 
     if missing:
-        raise EnvironmentError(f"Erro: Variáveis de ambiente ausentes no .env: {', '.join(missing)}")
+        raise EnvironmentError(
+            f"Erro: Variáveis de ambiente ausentes no .env: {', '.join(missing)}"
+        )
+
 
 DB_CONFIG = {
     "user": os.getenv("DB_USER"),
@@ -32,7 +36,6 @@ DB_CONFIG = {
     "host": os.getenv("DB_HOST", "localhost"),
     "port": int(os.getenv("DB_PORT", 3306)),
     "database": os.getenv("DB_NAME"),
-
 }
 
 

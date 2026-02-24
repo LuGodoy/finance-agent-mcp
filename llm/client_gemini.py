@@ -12,10 +12,7 @@ logger = logging.getLogger(__name__)
 class FinanceAgent:
     def __init__(self, api_key: str):
         self.api_key = api_key
-        self.server_params = StdioServerParameters(
-            command="python",
-            args=["mcp_server/server.py"]
-            )
+        self.server_params = StdioServerParameters(command="python", args=["mcp_server/server.py"])
 
     async def _process_mcp_cycle(self, prompt: str):
         async with stdio_client(self.server_params) as (read, write):
@@ -59,7 +56,7 @@ class FinanceAgent:
                 # simplesmente remova a variável e coloque o valor direto no config:
 
                 client = genai.Client(api_key=self.api_key)
-                model_id = "models/gemini-2.5-flash" #"gemini-3-flash-preview"  #"gemini-1.5-flash"  #"gemini-3-flash-preview"  # "gemini-2.0-flash" #"gemini-flash-latest" #"gemini-1.5-flash" #"gemini-2.5-flash" #"gemini-1.5-flash" #"gemini-2.0-flash"
+                model_id = "models/gemini-2.5-flash"  # "gemini-3-flash-preview"  #"gemini-1.5-flash"  #"gemini-3-flash-preview"  # "gemini-2.0-flash" #"gemini-flash-latest" #"gemini-1.5-flash" #"gemini-2.5-flash" #"gemini-1.5-flash" #"gemini-2.0-flash"
 
                 logger.info(f"Solicitando modelo: {model_id}")
 
@@ -149,7 +146,7 @@ class FinanceAgent:
             logger.error(f"Erro no FinanceAgent: {e}")
             raise e"""
 
-    async def ask_question(self, prompt: str) -> str: # DEVE SER ASYNC
+    async def ask_question(self, prompt: str) -> str:  # DEVE SER ASYNC
         try:
             # DEVE TER AWAIT
             return await self._process_mcp_cycle(prompt)

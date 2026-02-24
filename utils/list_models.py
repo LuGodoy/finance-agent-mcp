@@ -17,5 +17,5 @@ for model in client.models.list():
     # E verificamos se supported_actions existe antes de iterar
     actions = model.supported_actions or []
 
-    if 'generateContent' in actions:
+    if "generateContent" in actions:
         print(f"ID: {model.name}")
