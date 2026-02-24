@@ -180,7 +180,7 @@ DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=sua_senha
 DB_NAME=personal_finance
-TABLE_NAME=
+TABLE_NAME=transactions
 ```
 
 ### 4️⃣ Executar a aplicação

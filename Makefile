@@ -94,6 +94,7 @@ env:
 	@echo "DB_USER=" >> .env.example
 	@echo "DB_PASSWORD=" >> .env.example
 	@echo "DB_NAME=db_finance" >> .env.example
+	@echo "TABLE_NAME=transactions" >> .env.example
 	@echo "" >> .env.example
 	@echo "LOG_LEVEL=INFO" >> .env.example
 
