@@ -1,4 +1,10 @@
 # ____________VERSÃO ___________________
+import asyncio
+
+import nest_asyncio
+
+nest_asyncio.apply()
+
 import logging
 import os
 import traceback
@@ -78,7 +84,7 @@ if prompt := st.chat_input("Qual a dúvida sobre seus gastos?"):
     with st.chat_message("assistant", avatar=AI_AVATAR):
         with st.spinner("Consultando inteligência financeira..."):
             try:
-                response_text = agent.ask_question(prompt)
+                response_text = asyncio.run(agent.ask_question(prompt))
                 st.markdown(response_text)
 
                 st.session_state.messages.append({"role": "assistant", "content": response_text})

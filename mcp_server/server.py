@@ -1,12 +1,10 @@
+from typing import Any, Coroutine, cast
+
 from fastmcp import FastMCP
 
 from mcp_server.tools.expense_items import expense_items
 from mcp_server.tools.expense_summary import expense_summary
 
-# Adiciona o caminho para encontrar mcp_server
-# sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-# Cria o Servidor MCP
 mcp = FastMCP("gerenciador de Gastos")
 
 
@@ -39,7 +37,8 @@ async def get_expense_items(item: str, period: str) -> str:
     """
     # Chamamos a função interna passando o dicionário que ela espera
     try:
-        resultado_bruto = await expense_items({"item": item, "period": period})
+        corrotina = cast(Coroutine[Any, Any, list], expense_items({"item": item, "period": period}))
+        resultado_bruto = await corrotina
 
         # O FastMCP precisa de uma string, então extraimos o texto da lista:
         if isinstance(resultado_bruto, list) and len(resultado_bruto) > 0:

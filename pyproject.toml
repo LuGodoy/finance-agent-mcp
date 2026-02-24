@@ -42,7 +42,7 @@ line-length = 100
 # E (Error), F (Pyflakes), W (Warning), I (Isort - organiza imports)
 select = ["E", "F", "W", "I"]
 # Regras que você quer ignorar (ex: erro de linha muito longa E501)
-ignore = ["E501"]
+ignore = ["E501", "E402"]
 
 [tool.ruff.format]
 # Configurações para o formatador automático do Ruff
