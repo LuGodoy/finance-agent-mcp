@@ -28,12 +28,13 @@ class FinanceAgent:
                 for t in mcp_tools_list.tools:
                     # Fazemos uma cópia para não alterar o objeto original
                     import copy
+
                     schema_dict = copy.deepcopy(t.inputSchema) if t.inputSchema else None
-                    
+
                     if schema_dict and isinstance(schema_dict, dict):
                         # O Gemini odeia esse campo que o Pydantic v2 gera automaticamente
                         schema_dict.pop("additionalProperties", None)
-                        
+
                         # Limpa também dentro de cada propriedade (caso haja objetos aninhados)
                         properties = schema_dict.get("properties", {})
                         if isinstance(properties, dict):
