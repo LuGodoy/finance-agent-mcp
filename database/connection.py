@@ -11,11 +11,12 @@ def sanitize_identifier(name: str) -> str:
         return ""
     return name.replace("`", "")
 
+load_dotenv(dotenv_path=".env")
+
 # 2. Variáveis limpas exportadas para todo o projeto
 DB_NAME = sanitize_identifier(os.getenv("DB_NAME", ""))
 TABLE_NAME = sanitize_identifier(os.getenv("TABLE_NAME", ""))
 
-load_dotenv(dotenv_path=".env")
 
 def validate_env():
     """Verifica se todas as variáveis obrigatórias estão presentes."""
@@ -25,23 +26,24 @@ def validate_env():
     if missing:
         raise EnvironmentError(f"Erro: Variáveis de ambiente ausentes no .env: {', '.join(missing)}")
 
-# --- AJUSTE PARA O GITHUB ACTIONS ---
-# Só validamos se NÃO estivermos no ambiente do GitHub Actions
-if not os.getenv("GITHUB_ACTIONS"):
-    validate_env()
-# ------------------------------------
-
 DB_CONFIG = {
     "user": os.getenv("DB_USER"),
     "password": os.getenv("DB_PASSWORD"),
     "host": os.getenv("DB_HOST", "localhost"),
     "port": int(os.getenv("DB_PORT", 3306)),
     "database": os.getenv("DB_NAME"),
+
 }
 
 
 def create_connection():
     """Cria e retorna uma conexão com o banco de dados MYSQL"""
+    # --- AJUSTE PARA O GITHUB ACTIONS ---
+    # Só validamos se NÃO estivermos no ambiente do GitHub Actions
+    if not os.getenv("GITHUB_ACTIONS"):
+        validate_env()
+    # ------------------------------------
+
     try:
         conn = mysql.connector.connect(**DB_CONFIG)
         if conn.is_connected():
