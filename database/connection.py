@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from mysql.connector import Error
 
 
-# logger = logging.getLogger(__name__)
 def sanitize_identifier(name: str) -> str:
     if not name:
         return ""
@@ -14,7 +13,6 @@ def sanitize_identifier(name: str) -> str:
 
 load_dotenv(dotenv_path=".env")
 
-# 2. Variáveis limpas exportadas para todo o projeto
 DB_NAME = sanitize_identifier(os.getenv("DB_NAME", ""))
 TABLE_NAME = sanitize_identifier(os.getenv("TABLE_NAME", ""))
 
@@ -41,18 +39,14 @@ DB_CONFIG = {
 
 def create_connection():
     """Cria e retorna uma conexão com o banco de dados MYSQL"""
-    # --- AJUSTE PARA O GITHUB ACTIONS ---
-    # Só validamos se NÃO estivermos no ambiente do GitHub Actions
+
     if not os.getenv("GITHUB_ACTIONS"):
         validate_env()
-    # ------------------------------------
 
     try:
         conn = mysql.connector.connect(**DB_CONFIG)
         if conn.is_connected():
-            # logger.info("Conexão ao MySQL bem sucedida")
             return conn
 
     except Error:
-        # logger.info(f"Erro ao conectar com MYSQL: {e}")
         return None

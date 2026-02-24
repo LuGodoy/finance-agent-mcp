@@ -1,4 +1,3 @@
-# ____________VERSÃO ___________________
 import asyncio
 
 import nest_asyncio
@@ -14,22 +13,17 @@ from dotenv import load_dotenv
 
 from llm.client_gemini import FinanceAgent
 
-# ------------------ Configuração básica ------------------
-
 logger = logging.getLogger(__name__)
 
 load_dotenv()
 
 st.set_page_config(page_title="Assistente de Gastos", page_icon="💰", layout="centered")
 
-MAX_HISTORY = 6  # número máximo de mensagens no chat
-
-# ------------------ Cache do Agente ------------------
+MAX_HISTORY = 6
 
 
 @st.cache_resource
 def get_finance_agent():
-    # api_key = os.getenv("GROQ_API_KEY", "")
     api_key = os.getenv("GEMINI_API_KEY", "")
     if not api_key:
         st.error("Chave da API do GEMINI não encontrada")
@@ -38,8 +32,6 @@ def get_finance_agent():
 
 
 agent = get_finance_agent()
-
-# ------------------ CSS ------------------
 
 
 def local_css(file_name):
@@ -51,17 +43,14 @@ def local_css(file_name):
 BASE_DIR = os.path.dirname(__file__)
 local_css(os.path.join(BASE_DIR, "styles.css"))
 
-# ------------------ Header ------------------
-
 st.markdown('<h1 class="main-title">Agente de Gestão Financeira 💰</h1>', unsafe_allow_html=True)
 st.markdown(
     '<p class="sub-text">Controle suas finanças com inteligência.</p>', unsafe_allow_html=True
 )
 st.divider()
 
-USER_AVATAR = "assets/user.png"  # "https://cdn-icons-png.flaticon.com/512/6833/6833605.png"
-AI_AVATAR = "assets/bot.png"  # "https://cdn-icons-png.flaticon.com/512/4712/4712035.png"
-# ------------------ Histórico ------------------
+USER_AVATAR = "assets/user.png"
+AI_AVATAR = "assets/bot.png"
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -71,16 +60,12 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"], avatar=current_avatar):
         st.markdown(message["content"])
 
-# ------------------ Input ------------------
-
 if prompt := st.chat_input("Qual a dúvida sobre seus gastos?"):
-    # Usuário 🧑‍💻
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     with st.chat_message("user", avatar=USER_AVATAR):
         st.markdown(prompt)
 
-    # Assistente "🤖"
     with st.chat_message("assistant", avatar=AI_AVATAR):
         with st.spinner("Consultando inteligência financeira..."):
             try:
@@ -89,17 +74,14 @@ if prompt := st.chat_input("Qual a dúvida sobre seus gastos?"):
 
                 st.session_state.messages.append({"role": "assistant", "content": response_text})
 
-                # 🔥 Limita histórico
                 st.session_state.messages = st.session_state.messages[-MAX_HISTORY:]
 
             except Exception as e:
-                # 1. Log detalhado para o desenvolvedor (no terminal)
                 error_trace = traceback.format_exc()
                 logger.error(f"Erro detectado: {error_trace}")
 
-                error_msg = str(e).upper()  # Normaliza para facilitar a busca
+                error_msg = str(e).upper()
 
-                # 2. Tratamento específico por tipo de erro
                 if "429" in error_msg or "QUOTA_EXCEEDED" in error_msg:
                     st.error(
                         "🚀 **Limite atingido:** Muitas perguntas em pouco tempo. Aguarde 1 minuto."
@@ -124,8 +106,5 @@ if prompt := st.chat_input("Qual a dúvida sobre seus gastos?"):
                     st.error("🌐 **Erro de Conexão:** Verifique sua internet.")
 
                 else:
-                    # Exibe um resumo do erro real para ajudar no debug rápido
                     st.error(f"💥 **Erro inesperado:** {type(e).__name__}")
-                    st.info(
-                        f"Detalhe: {str(e)[:100]}..."
-                    )  # Mostra os primeiros 100 caracteres do erro
+                    st.info(f"Detalhe: {str(e)[:100]}...")

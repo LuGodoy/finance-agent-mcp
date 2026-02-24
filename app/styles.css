@@ -4,25 +4,21 @@
 .main-title {
     font-family: 'Inter', sans-serif;
     color: #1B5E20;
-    /*#2E7D32;*/
     text-align: center;
     font-size: 2.2–2.5rem;
     font-weight: 700;
     padding: 1.5rem 0rem;
     background-color: rgba(141, 205, 225, 0.2);
-    /*background: linear-gradient(90deg, #e8f5e9, #ffffff);*/
     border-radius: 10px;
     margin-bottom: 2rem;
 }
 
-/* Estilizando o subtítulo */
 .sub-text {
     text-align: center;
     color: #535050;
     font-style: italic;
 }
 
-/* Deixa os cards do Streamlit mais arredondados */
 .stChatMessage {
     border-radius: 15px;
     margin-bottom: 10px;

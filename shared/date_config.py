@@ -36,16 +36,15 @@ class DateHandler:
 
         if isinstance(date, str):
             date = date.strip().strip("\"'")
-            # Tenta extrair um ano de 4 dígitos manualmente se existir
             year_match = re.search(r"\b(20\d{2})\b", date)
             extracted_year = year_match.group(1) if year_match else None
 
             parsed = dateparser.parse(
                 date,
-                languages=["pt", "de", "en"],  # português, alemão, inglês, etc.
+                languages=["pt", "de", "en"],
                 settings={
                     "PREFER_DATES_FROM": "past",
-                    "DATE_ORDER": "DMY",  # ajuda em formatos 10/01/2026 etc. [web:108][web:107]
+                    "DATE_ORDER": "DMY",
                     "RELATIVE_BASE": datetime(int(extracted_year), 1, 1)
                     if extracted_year
                     else datetime.now(),
@@ -137,18 +136,12 @@ class PeriodHandler:
                     lambda m: PeriodHandler._mes_especifico(12, m.group(1)),
                 ),
                 (r"dezembro$", lambda m: PeriodHandler._mes_especifico(12, None)),
-                # _________
                 # ========= PORTUGUÊS (EXEMPLO NOVEMBRO) =========
-                # Primeiro: O padrão mais específico (com ano)
                 (
                     r"novembro\s+(?:de\s+)?(\d{4})",
                     lambda m: PeriodHandler._mes_especifico(11, m.group(1)),
                 ),
-                # Segundo: O padrão genérico (sem ano) - note o '$' para garantir que não há nada depois
                 (r"^novembro$", lambda m: PeriodHandler._mes_especifico(11, None)),
-                # _______
-                # (r'novembro\s+(?:de\s+)?(\d{4})', lambda m: PeriodHandler._mes_especifico(11, m.group(1))),
-                # (r'novembro$', lambda m: PeriodHandler._mes_especifico(11, None)),
                 (
                     r"outubro\s+(?:de\s+)?(\d{4})",
                     lambda m: PeriodHandler._mes_especifico(10, m.group(1)),
@@ -305,7 +298,6 @@ class PeriodHandler:
                     result["end"] = end.strftime("%Y-%m-%d") if end else None
                     return result
 
-            # 2) CASO ESPECIAL: string é só um ano (ex.: "2025", "  2023  ")
             match_ano = re.fullmatch(r"\s*(\d{4})\s*", raw_str)
             if match_ano:
                 inicio, fim = PeriodHandler._ano_especifico(match_ano.group(1))
@@ -313,8 +305,6 @@ class PeriodHandler:
                 result["end"] = fim.strftime("%Y-%m-%d")
                 return result
 
-            # Fallback: data única via dateparser (desabilitado para meses específicos)
-            # Verifica se é um mês conhecido antes de usar dateparser
             meses_conhecidos = [
                 "janeiro",
                 "fevereiro",
@@ -353,7 +343,6 @@ class PeriodHandler:
                 "december",
             ]
 
-            # Se contém um mês conhecido, não usar dateparser
             if not any(mes in text for mes in meses_conhecidos):
                 parsed = dateparser.parse(
                     raw_str,
@@ -370,8 +359,8 @@ class PeriodHandler:
     @staticmethod
     def _semana_atual() -> Tuple[datetime, datetime]:
         hoje = datetime.now()
-        inicio = hoje - timedelta(days=hoje.weekday())  # segunda
-        fim = inicio + timedelta(days=6)  # domingo
+        inicio = hoje - timedelta(days=hoje.weekday())
+        fim = inicio + timedelta(days=6)
         return inicio, fim
 
     @staticmethod

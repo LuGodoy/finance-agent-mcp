@@ -3,7 +3,6 @@ import unittest
 
 from database.connection import create_connection
 
-# Verifica se estamos no GitHub Actions
 IN_GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 
 

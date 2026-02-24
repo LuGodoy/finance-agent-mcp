@@ -4,7 +4,7 @@ from typing import Any, Dict, cast
 from dotenv import load_dotenv
 from mcp import types
 
-from database.connection import DB_CONFIG, TABLE_NAME, create_connection
+from database.connection import DB_NAME, TABLE_NAME, create_connection
 from shared.date_config import PeriodHandler
 
 load_dotenv(dotenv_path=".env")
@@ -64,7 +64,7 @@ async def expense_items(argument: Dict):
             SELECT
                 SUM(ROUND(preco_unitario * quantidade, 2)) as total,
                 COUNT(*) as quantidade_transacoes
-            FROM `{DB_CONFIG}`.`{TABLE_NAME}`
+            FROM `{DB_NAME}`.`{TABLE_NAME}`
             WHERE nome_item LIKE %s AND data_compra BETWEEN %s AND %s
         """
         search_term = f"{nome_item}%"
