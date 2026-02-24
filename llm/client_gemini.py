@@ -26,27 +26,30 @@ class FinanceAgent:
 
                 declarations = []
                 for t in mcp_tools_list.tools:
-                    schema_obj = None
-                    if t.inputSchema:
-                        schema_obj = types.Schema(**t.inputSchema)
+                    # Fazemos uma cópia para não alterar o objeto original
+                    import copy
+                    schema_dict = copy.deepcopy(t.inputSchema) if t.inputSchema else None
+                    
+                    if schema_dict and isinstance(schema_dict, dict):
+                        # O Gemini odeia esse campo que o Pydantic v2 gera automaticamente
+                        schema_dict.pop("additionalProperties", None)
+                        
+                        # Limpa também dentro de cada propriedade (caso haja objetos aninhados)
+                        properties = schema_dict.get("properties", {})
+                        if isinstance(properties, dict):
+                            for prop in properties.values():
+                                if isinstance(prop, dict):
+                                    prop.pop("additionalProperties", None)
 
                     declarations.append(
                         types.FunctionDeclaration(
-                            name=t.name, description=t.description, parameters=schema_obj
+                            name=t.name,
+                            description=t.description,
+                            parameters=types.Schema(**schema_dict) if schema_dict else None,
                         )
                     )
 
-                gemini_tool = types.Tool(
-                    function_declarations=[
-                        types.FunctionDeclaration(
-                            name=t.name,
-                            description=t.description,
-                            parameters=types.Schema(**t.inputSchema) if t.inputSchema else None,
-                        )
-                        for t in mcp_tools_list.tools
-                    ]
-                )
-
+                gemini_tool = types.Tool(function_declarations=declarations)
                 client = genai.Client(api_key=self.api_key)
                 model_id = "models/gemini-2.5-flash"
 
