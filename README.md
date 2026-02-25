@@ -19,10 +19,10 @@ Projeto desenvolvido como portfólio técnico para demonstrar habilidades em AI 
 
 Grupos que compartilham despesas — como famílias, repúblicas ou times — frequentemente 
 perdem o controle dos gastos por falta de uma forma simples de consultar e entender 
-os dados financeiros. PPlanilhas são difíceis de navegar e dashboards exigem que o usuário saiba onde clicar.
+os dados financeiros. Planilhas são difíceis de navegar e dashboards exigem que o usuário saiba onde clicar.
 
 Este assistente permite que qualquer pessoa do grupo faça perguntas em linguagem natural 
-como *"Quanto gastamos em janeiro?"* ou *"De quanto foram os nossos gastos com celular este mês?"* e receba respostas claras e instantâneas — sem precisar abrir uma planilha ou montar um filtro.
+como *"Quanto gastamos em janeiro?"* ou *"De quanto foram os nossos gastos com leite este mês?"* e receba respostas claras e instantâneas — sem precisar abrir uma planilha ou montar um filtro.
 
 ---
 
@@ -35,17 +35,17 @@ O sistema integra:
 - 🤖 Large Language Model (Google Gemini)
 - 🧠 Agente inteligente para interpretação das perguntas
 - 🔌 MCP Server para acesso estruturado aos dados
-- 🗄️ Banco de dados MySQL
+- 🗄️ Banco de dados MySQL local (administrado via MySQL Workbench)
 - 🎨 Interface conversacional com Streamlit
 
 ## 🧠 O que este projeto demonstra
 
-✅ Construção de AI Agent end-to-end  
-✅ Integração LLM + Banco de Dados  
-✅ Arquitetura MCP com Tool Calling  
-✅ Separação clara entre camadas da aplicação  
-✅ Organização profissional de projeto Python  
-✅ Boas práticas de engenharia de software
+- Construção de AI Agent end-to-end  
+- Integração entre LLM e Banco de Dados via MCP (Model Context Protocol)  
+- Arquitetura MCP com Tool Calling  
+- Separação clara entre camadas da aplicação  
+- Organização profissional de projeto Python  
+- Boas práticas de engenharia de software
 
 ---
 
@@ -80,7 +80,7 @@ O sistema integra:
     <img src="docs/diagrams/architecture.png"
          alt="Arquitetura do Agente Financeiro: Usuário, Streamlit, Gemini, MCP e MySQL"
          width="100%"
-         style="background-color: rgba(255,255,255,0.05); border-radius: 10px; padding: 10px;">
+         style="background-color: rgba(255, 255, 255, 0.2); border-radius: 10px; padding: 10px;">
   </a>
   <br>
   <p align="center">
@@ -98,7 +98,8 @@ O sistema integra:
 ├── llm
 ├── mcp_server
 ├── shared
-└── tests
+├── tests
+└── utils
 ```
 
 ## 🛠️ Funcionalidades do Agente
@@ -110,7 +111,7 @@ O servidor MCP expõe ferramentas específicas que permitem ao LLM interagir com
 | **Sumário de Despesas** | Consolida gastos por item e/ou pelo período solicitado. | **Python / MCP SDK** |
 | **Listagem de Itens** | Recupera detalhes de despesas com busca flexível (`LIKE`). | **SQL (MySQL)** |
 | **Camada de Dados** | Interface de conexão e execução de queries parametrizadas. | **MySQL Connector** |
-| **Interpretação Natural** | Traduz dados brutos em insights financeiros amigáveis. | **Gemini Prompt Eng.** |
+| **Interpretação Natural** | Traduz dados brutos em informações financeiros amigáveis. | **Gemini Prompt Eng.** |
 
 ## 🧠 Design Lógico e Fluxo de Pensamento
 
@@ -123,7 +124,7 @@ O servidor MCP expõe ferramentas específicas que permitem ao LLM interagir com
 ## ⚙️ Stack Tecnológica
 
 ### 🤖 IA & LLM
-- Google Gemini 1.5 Pro
+- Google Gemini 
 - MCP (Model Context Protocol)
 - Prompt Engineering
 
@@ -190,12 +191,12 @@ make run
 
 A aplicação estará disponível em `http://localhost:8501`.
 
-### Executar o MCP Server
+### Executar o MCP Server (opcional)
 ```bash
 make mcp
 ```
 
-### Executar testes
+### Executar testes (recomendada)
 ```bash
 make test
 ```
@@ -253,10 +254,16 @@ net start mysql
 ## 👩‍💻 Autora
 
 **Luciene Godoy**  
-Data Science • AI Agents • Software Engineering • Matemática
+AI Agents | Data Science | Software Engineering | Matemática
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Luciene_Godoy-0077B5?logo=linkedin&logoColor=white)](seu-link)
+**Stack:** Python • MCP • Google Gemini • MySQL • Streamlit
+
+<p align="center">
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Luciene_Godoy-0077B5?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luciene-godoy-b8670a179)
 [![GitHub](https://img.shields.io/badge/GitHub-LuGodoy-181717?logo=github&logoColor=white)](https://github.com/LuGodoy)
+
+</p>
 
 ## 📄 Licença
 

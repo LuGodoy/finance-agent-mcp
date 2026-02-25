@@ -61,7 +61,7 @@ setup:
 
 	@touch assets/bot.png assets/user.png
 
-	@touch README.md requirements.txt pyproject.toml LICENSE
+	@touch README.md pyproject.toml LICENSE
 
 	@echo "✅ Estrutura criada!"
 
