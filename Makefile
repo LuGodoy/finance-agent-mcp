@@ -73,9 +73,8 @@ install:
 	@echo "🐍 Criando ambiente virtual..."
 	$(PYTHON) -m venv $(VENV)
 
-	@echo "📦 Instalando dependências..."
+	@echo "📦 Instalando dependências do pyproject.toml..."
 	$(PIP) install --upgrade pip
-	# $(PIP) install -r requirements.txt
 	$(PIP) install -e ".[dev]"
 
 	@echo "✅ Ambiente pronto!"
@@ -152,7 +151,7 @@ list-models:
 # ==============================
 .PHONY: lint
 lint:
-	@echo "🔍 Rodando Ruff (Lint)..."
-	$(PY) -m ruff check .
+	@echo "🔍 Rodando Ruff (Lint + Fix)..."
+	$(PY) -m ruff check . --fix
 	@echo "🎨 Rodando Ruff (Format)..."
 	$(PY) -m ruff format .

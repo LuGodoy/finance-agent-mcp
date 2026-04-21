@@ -94,7 +94,6 @@ class PeriodHandler:
 
             patterns = [
                 # ========= PORTUGUÊS =========
-                # Adicione este padrão no topo da lista 'patterns' dentro de parse_periodo
                 (
                     r"(.+?)\s+(?:a|at[ée]|to|bis)\s+(.+)",
                     lambda m: (
@@ -205,8 +204,8 @@ class PeriodHandler:
                 (r"diese woche", lambda m: PeriodHandler._semana_atual()),
                 (
                     r"letzte woche",
-                    lambda m: PeriodHandler._semana_atual(),
-                ),  # se quiser tratar igual
+                    lambda m: PeriodHandler._semana_passada(),
+                ),
                 # Mês atual / passado
                 (r"dieser monat", lambda m: PeriodHandler._mes_atual()),
                 (r"letzter monat", lambda m: PeriodHandler._mes_passado()),

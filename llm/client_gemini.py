@@ -80,7 +80,10 @@ class FinanceAgent:
                             return "Erro: O modelo não especificou a ferramenta corretamente."
 
                         logger.info(f"Executando ferramenta MCP: {fc.name}")
-                        print(f">>> TOOL: {fc.name} | ARGS: {dict(fc.args) if fc.args else {}}", flush=True) # Adicionei essa linha
+                        print(
+                            f">>> TOOL: {fc.name} | ARGS: {dict(fc.args) if fc.args else {}}",
+                            flush=True,
+                        )
 
                         tool_result = await session.call_tool(
                             name=fc.name, arguments=dict(fc.args) if fc.args else {}

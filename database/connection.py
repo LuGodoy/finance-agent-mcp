@@ -11,10 +11,12 @@ def sanitize_identifier(name: str) -> str:
         return ""
     return name.replace("`", "")
 
+
 load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
 
 DB_NAME = sanitize_identifier(os.getenv("DB_NAME", ""))
 TABLE_NAME = sanitize_identifier(os.getenv("TABLE_NAME", ""))
+
 
 def validate_env():
     required_vars = ["DB_USER", "DB_PASSWORD", "DB_HOST", "DB_NAME", "TABLE_NAME"]
@@ -23,6 +25,7 @@ def validate_env():
         raise EnvironmentError(
             f"Erro: Variáveis de ambiente ausentes no .env: {', '.join(missing)}"
         )
+
 
 def create_connection():
     """Cria e retorna uma conexão com o banco de dados MYSQL"""

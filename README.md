@@ -156,7 +156,7 @@ O servidor MCP expõe ferramentas específicas que permitem ao LLM interagir com
 
 ### 1️⃣ Clonar o repositório
 ```bash
-git clone https://github.com/SEU_USUARIO/finance-agent-mcp.git
+git clone https://github.com/LuGodoy/finance-agent-mcp.git
 cd finance-agent-mcp
 ```
 
