@@ -111,7 +111,7 @@ O servidor MCP expõe ferramentas específicas que permitem ao LLM interagir com
 | **Sumário de Despesas** | Consolida gastos por item e/ou pelo período solicitado. | **Python / MCP SDK** |
 | **Listagem de Itens** | Recupera detalhes de despesas com busca flexível (`LIKE`). | **SQL (MySQL)** |
 | **Camada de Dados** | Interface de conexão e execução de queries parametrizadas. | **MySQL Connector** |
-| **Interpretação Natural** | Traduz dados brutos em informações financeiros amigáveis. | **Gemini Prompt Eng.** |
+| **Interpretação Natural** | Traduza dados brutos em informações financeiras amigáveis. | **Gemini Prompt Eng.** |
 
 ## 🧠 Design Lógico e Fluxo de Pensamento
 
@@ -196,7 +196,7 @@ A aplicação estará disponível em `http://localhost:8501`.
 make mcp
 ```
 
-### Executar testes (recomendada)
+### Executar testes (recomendado)
 ```bash
 make test
 ```
@@ -209,7 +209,7 @@ Este projeto está em desenvolvimento ativo. Próximas evoluções planejadas:
 
 - [ ] Suporte Multi-LLM, integrando outras APIs (OpenAI GPT-4o, Claude 3.5 Sonnet e Groq) para permitir a escolha do modelo via configuração.
 - [ ] Novas MCP Tools para análises mais avançadas
-- [ ] Migração das queries SQL puras para **SQLAlchemy** (uso de um ORM como o SQLAlchemy ajudaria na sanitização de queries e na prevenção de SQL Injection,)
+- [ ] Migração das queries SQL puras para **SQLAlchemy** (uso de um ORM como o SQLAlchemy ajudaria na sanitização de queries e na prevenção de SQL Injection)
 - [ ] Suporte a múltiplos grupos de despesas
 - [ ] Autenticação de usuários
 - [ ] Testes de integração para as MCP Tools
