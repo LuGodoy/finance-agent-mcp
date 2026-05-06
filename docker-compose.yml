@@ -1,0 +1,18 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: finance_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: personal_finance
+      MYSQL_USER: finance_user
+      MYSQL_PASSWORD: Finance@2026
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./scripts/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+
+volumes:
+  mysql_data:
