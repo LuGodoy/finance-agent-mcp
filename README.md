@@ -247,15 +247,37 @@ A aplicação estará disponível em `http://localhost:8501`/. ✅
 
 ---
 
-### Executar o MCP Server (opcional)
+### 🔌 Executar o MCP Server (opcional)
 ```bash
 make mcp
 ```
+O MCP Server é o componente que expõe as ferramentas financeiras para o LLM.
+Em uso normal ele é iniciado automaticamente pelo agente — você só precisa
+rodá-lo standalone para depuração ou desenvolvimento de novas tools.
 
-### Executar testes (recomendada)
+---
+
+### Executar testes
+
+O projeto tem dois tipos de testes:
+
+| Tipo | Arquivo | Precisa do banco? |
+|------|---------|-------------------|
+| Infraestrutura | `tests/test_infra.py` | ✅ Sim |
+| Agente (mock) | `tests/test_gemini_client.py` | ❌ Não |
+
+**Com Docker ativo** (recomendado para rodar todos os testes):
+```bash
+docker compose up -d
+make test
+```
+
+**Sem banco** (roda apenas os testes com mock):
 ```bash
 make test
 ```
+Os testes de infraestrutura serão pulados automaticamente se o banco
+não estiver disponível.
 
 ---
 
