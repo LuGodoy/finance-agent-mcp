@@ -84,23 +84,13 @@ install:
 # ==============================
 .PHONY: env
 env:
-	@echo "🔐 Criando .env.example..."
-
-	@echo "GEMINI_API_KEY=" > .env.example
-	@echo "" >> .env.example
-	@echo "DB_HOST=localhost" >> .env.example
-	@echo "DB_PORT=3306" >> .env.example
-	@echo "DB_USER=" >> .env.example
-	@echo "DB_PASSWORD=" >> .env.example
-	@echo "DB_NAME=db_finance" >> .env.example
-	@echo "TABLE_NAME=transactions" >> .env.example
-	@echo "" >> .env.example
-	@echo "LOG_LEVEL=INFO" >> .env.example
-
-	@echo "📄 Criando .env local..."
-	@if [ ! -f .env ]; then cp .env.example .env; fi
-
-	@echo "✅ Arquivos de ambiente criados!"
+	@echo "📄 Criando .env local a partir do .env.example..."
+	@if [ ! -f .env ]; then \
+		cp .env.example .env; \
+		echo "✅ Arquivo .env criado! Preencha GEMINI_API_KEY antes de rodar."; \
+	else \
+		echo "⚠️  Arquivo .env já existe. Nenhuma alteração feita."; \
+	fi
 
 # ==============================
 # RUN APPLICATION

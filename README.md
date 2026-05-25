@@ -154,42 +154,98 @@ O servidor MCP expõe ferramentas específicas que permitem ao LLM interagir com
 
 ## 🚀 Como Executar o Projeto
 
-### 1️⃣ Clonar o repositório
+Você pode rodar o projeto de duas formas: com Docker (recomendado) ou com MySQL local.
+
+---
+
+### 🐳 Opção 1 — Com Docker (recomendado)
+
+Pré-requisitos: Docker instalado e uma chave da API do Gemini.
+Obtenha sua chave gratuitamente em: https://aistudio.google.com/app/apikey
+
+#### 1️⃣ Clonar o repositório
 ```bash
 git clone https://github.com/LuGodoy/finance-agent-mcp.git
 cd finance-agent-mcp
 ```
 
-### 2️⃣ Criar ambiente virtual e instalar dependências
+#### 2️⃣ Subir o banco de dados
+```bash
+docker compose up -d
+```
+Isso cria o banco, a tabela e insere dados de exemplo automaticamente.
+
+#### 3️⃣ Configurar o .env
+```bash
+cp .env.example .env
+```
+Abra o `.env` e preencha apenas:
+
+`GEMINI_API_KEY=sua_chave_aqui`
+
+As demais variáveis já estão configuradas para o Docker.
+
+#### 4️⃣ Instalar dependências
 ```bash
 make install
 ```
 
-Esse comando irá criar o ambiente virtual `.venv` e instalar todas as dependências necessárias.
-
-### 3️⃣ Criar variáveis de ambiente
-```bash
-make env
-```
-
-Edite o arquivo .env gerado e preencha-o com suas credenciais:
-```
-GEMINI_API_KEY=sua_chave_aqui
-
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=sua_senha
-DB_NAME=personal_finance
-TABLE_NAME=transactions
-```
-
-### 4️⃣ Executar a aplicação
+#### 5️⃣ Rodar a aplicação
 ```bash
 make run
 ```
+Acesse http://localhost:8501 — o agente já estará funcionando com dados. ✅
 
-A aplicação estará disponível em `http://localhost:8501`.
+---
+
+### 🖥️ Opção 2 — Com MySQL local
+
+#### 1️⃣ Clonar o repositório
+```bash
+git clone https://github.com/LuGodoy/finance-agent-mcp.git
+cd finance-agent-mcp
+```
+
+#### 2️⃣ Criar o banco e a tabela
+Entre no MySQL e execute:
+```sql
+CREATE DATABASE personal_finance;
+USE personal_finance;
+
+CREATE TABLE transactions (
+  id             INT AUTO_INCREMENT PRIMARY KEY,
+  nome_item      VARCHAR(255) NOT NULL,
+  preco_unitario DECIMAL(10,2) NOT NULL,
+  quantidade     DECIMAL(10,3) NOT NULL,
+  data_compra    DATE NOT NULL
+);
+```
+
+#### 3️⃣ Configurar o .env
+```bash
+cp .env.example .env
+```
+Edite o `.env` ajustando as credenciais do seu MySQL local:
+
+```
+GEMINI_API_KEY=sua_chave_aqui
+DB_HOST=localhost
+DB_USER=seu_usuario
+DB_PASSWORD=sua_senha
+```
+
+#### 4️⃣ Instalar dependências
+```bash
+make install
+```
+
+#### 5️⃣ Rodar a aplicação
+```bash
+make run
+```
+A aplicação estará disponível em `http://localhost:8501`/. ✅
+
+---
 
 ### Executar o MCP Server (opcional)
 ```bash
