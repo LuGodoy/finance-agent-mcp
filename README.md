@@ -183,7 +183,8 @@ Abra o `.env` e preencha apenas:
 
 `GEMINI_API_KEY=sua_chave_aqui`
 
-As demais variáveis já estão configuradas para o Docker.
+As demais variáveis já estão pré-configuradas. `DB_HOST=localhost` funciona com Docker
+porque a porta 3306 é mapeada automaticamente pelo `docker-compose.yml`.
 
 #### 4️⃣ Instalar dependências
 ```bash
@@ -225,14 +226,15 @@ CREATE TABLE transactions (
 ```bash
 cp .env.example .env
 ```
-Edite o `.env` ajustando as credenciais do seu MySQL local:
+Edite o `.env` com suas credenciais:
 
 ```
 GEMINI_API_KEY=sua_chave_aqui
-DB_HOST=localhost
 DB_USER=seu_usuario
 DB_PASSWORD=sua_senha
 ```
+
+`DB_HOST=localhost` já é o padrão — não precisa alterar.
 
 #### 4️⃣ Instalar dependências
 ```bash
