@@ -177,7 +177,7 @@ Isso cria o banco, a tabela e insere dados de exemplo automaticamente.
 
 #### 3️⃣ Configurar o .env
 ```bash
-cp .env.example .env
+make env
 ```
 Abra o `.env` e preencha apenas:
 
@@ -224,7 +224,7 @@ CREATE TABLE transactions (
 
 #### 3️⃣ Configurar o .env
 ```bash
-cp .env.example .env
+make env
 ```
 Edite o `.env` com suas credenciais:
 
