@@ -94,10 +94,23 @@ env:
 	fi
 
 # ==============================
+# WAIT FOR DB (Docker only)
+# ==============================
+.PHONY: wait-db
+wait-db:
+	@if docker ps --filter name=finance_mysql --filter status=running --format "{{.Names}}" 2>/dev/null | grep -q finance_mysql; then \
+		echo "⏳ Aguardando MySQL ficar saudável..."; \
+		until [ "$$(docker inspect --format='{{.State.Health.Status}}' finance_mysql 2>/dev/null)" = "healthy" ]; do \
+			printf "."; sleep 2; \
+		done; \
+		echo " ✅ Banco pronto!"; \
+	fi
+
+# ==============================
 # RUN APPLICATION
 # ==============================
 .PHONY: run
-run:
+run: wait-db
 	@echo "🚀 Iniciando Streamlit..."
 	$(PY) -m streamlit run app/main.py
 
