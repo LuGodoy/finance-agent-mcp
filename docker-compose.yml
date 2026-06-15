@@ -10,6 +10,12 @@ services:
       MYSQL_PASSWORD: Finance@2026
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "finance_user", "-pFinance@2026"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     volumes:
       - mysql_data:/var/lib/mysql
       - ./scripts/seed.sql:/docker-entrypoint-initdb.d/seed.sql

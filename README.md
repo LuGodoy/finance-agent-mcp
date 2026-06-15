@@ -177,13 +177,14 @@ Isso cria o banco, a tabela e insere dados de exemplo automaticamente.
 
 #### 3️⃣ Configurar o .env
 ```bash
-cp .env.example .env
+make env
 ```
 Abra o `.env` e preencha apenas:
 
 `GEMINI_API_KEY=sua_chave_aqui`
 
-As demais variáveis já estão configuradas para o Docker.
+As demais variáveis já estão pré-configuradas. `DB_HOST=localhost` funciona com Docker
+porque a porta 3306 é mapeada automaticamente pelo `docker-compose.yml`.
 
 #### 4️⃣ Instalar dependências
 ```bash
@@ -223,16 +224,17 @@ CREATE TABLE transactions (
 
 #### 3️⃣ Configurar o .env
 ```bash
-cp .env.example .env
+make env
 ```
-Edite o `.env` ajustando as credenciais do seu MySQL local:
+Edite o `.env` com suas credenciais:
 
 ```
 GEMINI_API_KEY=sua_chave_aqui
-DB_HOST=localhost
 DB_USER=seu_usuario
 DB_PASSWORD=sua_senha
 ```
+
+`DB_HOST=localhost` já é o padrão — não precisa alterar.
 
 #### 4️⃣ Instalar dependências
 ```bash
@@ -247,15 +249,37 @@ A aplicação estará disponível em `http://localhost:8501`/. ✅
 
 ---
 
-### Executar o MCP Server (opcional)
+### 🔌 Executar o MCP Server (opcional)
 ```bash
 make mcp
+```
+O MCP Server é o componente que expõe as ferramentas financeiras para o LLM.
+Em uso normal ele é iniciado automaticamente pelo agente — você só precisa
+rodá-lo standalone para depuração ou desenvolvimento de novas tools.
+
+---
+
+### Executar testes
+
+O projeto tem dois tipos de testes:
+
+| Tipo | Arquivo | Precisa do banco? |
+|------|---------|-------------------|
+| Infraestrutura | `tests/test_infra.py` | ✅ Sim |
+| Agente (mock) | `tests/test_gemini_client.py` | ❌ Não |
+
+**Com Docker ativo** (recomendado para rodar todos os testes):
+```bash
+docker compose up -d
+make test
 ```
 
 ### Executar testes (recomendado)
 ```bash
 make test
 ```
+Os testes de infraestrutura serão pulados automaticamente se o banco
+não estiver disponível.
 
 ---
 
