@@ -164,10 +164,9 @@ Pré-requisitos: Docker instalado e uma chave da API do Gemini.
 Obtenha sua chave gratuitamente em: https://aistudio.google.com/app/apikey
 
 #### 1️⃣ Clonar o repositório
-```bash
+
 git clone https://github.com/LuGodoy/finance-agent-mcp.git
 cd finance-agent-mcp
-```
 
 #### 2️⃣ Subir o banco de dados
 ```bash
